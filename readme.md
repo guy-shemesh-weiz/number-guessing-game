@@ -33,6 +33,6 @@ Run the game from the terminal:
 
 ```bash
 python mastermind.py
-
+```
 
 

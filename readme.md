@@ -1,14 +1,38 @@
-# Master Mind!
-Mastermind or Master Mind is a code-breaking game for two players invented in Israel.
-It resembles an earlier pencil and paper game called Bulls and Cows that may date back a century.
+# 🎯 Mastermind
+
+*Mastermind* is a classic code-breaking logic game originally invented in Israel, inspired by the earlier pen-and-paper game **Bulls & Cows**.
+
+Your mission: **decode the secret pattern in as few guesses as possible.**  
+Clear rules, minimal setup, infinite fun.
+
+---
+
+## 📌 How It Works
+
+The computer secretly generates a sequence of digits.  
+You submit guesses — and receive hints:
+
+| Symbol | Meaning |
+|--------|---------|
+| `*`    | Correct digit **in the correct position** |
+| `+`    | Correct digit **but in the wrong position** |
+
+**Example**
+
+Secret: `4271`  
+Guess: `1234`  
+Feedback: `*++`  
+- `1` is in the right spot  
+- `2` & `4` are correct but misplaced
+
+---
+
+## ▶️ How to Play
+
+Run the game from the terminal:
+
+```bash
+python mastermind.py
 
 
-### Rules
-The rules are simple! 
-The program generates a secret code, and the codebreaker tries to guess it with as few attempts as possible. 
-For every guess, the codemaker provides feedback in the form of * and + signs: 
-    - A * indicates a correct digit in the **correct** position.
-    - A + indicates a correct digit in the **wrong** position.
 
-### Playing the Game
-`python mastermind.py`

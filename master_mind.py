@@ -1,6 +1,7 @@
 import random
 from logic import calc_response
 from two_player_mode import play_two_player_match
+from scoreboard import add_score, format_leaderboard, get_high_score
 
 
 INSTRUCTIONS = """
@@ -16,6 +17,7 @@ MAIN_HELP = """
 Master Mind game!
 s - start a new game (vs computer)
 p - play two-player mode
+l - show leaderboard
 i - print instructions
 h - print this menu
 q - quit
@@ -83,31 +85,44 @@ def run_game(number_of_digits):
 
 
 def main():
-    best_score = None
     game_on = True
     print("Welcome to Master Mind!")
 
     while game_on:
         choice = input("Please enter your input: (h for help)\n>> ").strip()
-        new_score = None
+        
         if choice == "s":
             new_score = run_game(NUMBER_0F_DIGITS)
             if new_score is not None:
-                if best_score is None or new_score < best_score:
-                    best_score = new_score
-                    print(f"New best score: {best_score} guesses!")
+                # Prompt for player name and save to leaderboard
+                player_name = input("Enter your name for the leaderboard: ").strip() or "Anonymous"
+                is_new_high, prev_high = add_score(player_name, new_score)
+                
+                if is_new_high:
+                    print(f"\n🏆 NEW HIGH SCORE! 🏆")
+                    print(f"You cracked the code in {new_score} guesses!")
                 else:
-                    print(f"Best score remains: {best_score} guesses.")
+                    high_score = get_high_score()
+                    print(f"Your score: {new_score} guesses (High score: {high_score} guesses)")
+                print()
+        
         elif choice == "p":
             play_two_player_match()
+        
+        elif choice == "l":
+            print("\n" + format_leaderboard() + "\n")
+        
         elif choice == "i":
             print(INSTRUCTIONS)
+        
         elif choice == "h":
             print(MAIN_HELP)
+        
         elif choice == "q":
             print("Thank you for playing Master Mind! Goodbye!")
             game_on = False
             break
+        
         else:
             print("Invalid choice. Please try again.")
             print(MAIN_HELP)
